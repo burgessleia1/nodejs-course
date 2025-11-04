@@ -1,26 +1,27 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
+const express = require('express');
+const app = express();
+const PORT = 3000;
 
-const server = http.createServer((req, res) => {
-  const filePath = path.join(__dirname, 'index.html');
-  fs.readFile(filePath, (err, data) => {
-    if (err) {
-      res.writeHead(500);
-      res.end('Error loading page');
-    } else {
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end(data);
-    }
-  });
-});
+// Middleware
+app.use(express.json());
 
-server.listen(3000, () => {
-  console.log('Server running at http://localhost:3000');
-});
-
+// Route files
+const helloRoute = require('./routes/hello');
 const productRoutes = require('./routes/products');
+
+// Use routes
+app.use('/hello', helloRoute);
 app.use('/products', productRoutes);
+
+app.get('/', (req, res) => {
+  res.send('Welcome to my Node.js server!');
+});
+
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
+
 
 
     
