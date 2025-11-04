@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const { helloWorld, tooeleTech } = require('../controllers');
 
-router.get('/', (req, res) => {
-  res.send('Hello from hello.js!');
-});
+router.get('/', helloWorld);
+router.get('/ttech', tooeleTech);
 
 module.exports = router;
-
-

@@ -2,10 +2,6 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/index');
 
-// Existing routes
-router.get('/', controller.helloWorld);
-
-// New personal challenge route
-router.get('/ttech', controller.tooeleTech);
+router.get('/', controller.tooeleTech);
 
 module.exports = router;
